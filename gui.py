@@ -1,13 +1,18 @@
 from tkinter import *
+from tkinter.ttk import *
 
 class currConv:
-    def __init__(self,master):
-
-        #element init
+    def __init__(self,mast):
         str="(▀̿Ĺ̯▀̿ ̿)"
+        #element init
+        note=Notebook(mast)
+        master=Frame(note)
+        tab2=Notebook(note)
+        note.add(master,text="Currency convert")
+        note.add(tab2,text="News Feed")
         head=Label(master,text="Currency Convertor",font=("palatino", 30))
         inputField=Entry(master,width=30,font=("garamond",20))
-        options = ["US $","UK £","EUR €","IND ₹","JAP ¥"]
+        options = ["US $","UK label box tkinter£","EUR €","IND ₹","JAP ¥"]
         var1=StringVar(master)
         var1.set("From")
         list1=OptionMenu(master,var1,*options)
@@ -16,10 +21,10 @@ class currConv:
         var2.set("To")
         list2=OptionMenu(master,var2,*options)
         list2.config(width=10)
-        but=Button(master,text="convert",font=("garamond",15))
+        but=Button(master,text="convert")
         result=Label(master,text=str,font=("garamond",20))
-
         #grid declarations
+        note.grid()
         head.grid(row=0,columnspan=2,padx=15,pady=15)
         inputField.grid(row=1,columnspan=2,sticky=N+S+E+W,padx=5,pady=5)
         list1.grid(row=2,columnspan=1,sticky=N+S+W,padx=70,pady=10)
