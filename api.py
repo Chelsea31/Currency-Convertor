@@ -3,7 +3,7 @@
 import requests
 
 
-def main():
+def convert():
     print("Enter the amount to Convert from USD to INR : ")
 
     # takes user input for amount ot convert
