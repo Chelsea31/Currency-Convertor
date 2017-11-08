@@ -4,10 +4,10 @@ import requests
 
 
 def convert():
-    print("Enter the amount to Convert from USD to INR : ")
+    
 
     # takes user input for amount ot convert
-    toConvert = input()
+    toConvert = self.inputField.get()
 
     # fetches current price for USD
     response = requests.get(url="https://goo.gl/PbAhsZ")
@@ -22,6 +22,4 @@ def convert():
     usdinr = priceList["USDINR"]
 
     # Output
-    print("The current USD Price is : Rs." + str(usdinr))
-
     print(float(toConvert) * usdinr)
