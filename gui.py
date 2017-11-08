@@ -1,12 +1,13 @@
 from tkinter import *
 from tkinter.ttk import *
 import feedparser
+from api import convert
 
 
 
 class currConv:
     def convertCurr(self,event):
-        print(self.var2.get() + " " + self.var1.get())
+        convert()
         #Use this method to call your function. use str.set("") to show the result. use self.var1.get() and self.var2.get() to access the incoming and recipient currency. Use inputField.get() to access the amount to be changed.
 
     def __init__(self,master):
