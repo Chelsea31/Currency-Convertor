@@ -7,30 +7,34 @@ class currConv:
     def convertCurr(self,event):
         toConvert = self.inputField.get()
         if(toConvert.isnumeric()):
-            # fetches current price for USD
-            response = requests.get(url="https://goo.gl/PbAhsZ")
+            if(toConvert>0):
+                # API Request
+                response = requests.get(url="https://goo.gl/PbAhsZ")
 
-            # converts the response
-            jsonResponse = response.json()
+                # converts the response
+                jsonResponse = response.json()
 
-            # fetches list of currency
-            priceList = jsonResponse["quotes"]
+                # fetches list of currency
+                priceList = jsonResponse["quotes"]
 
-            # fetches USD to INR Conversion rate
-            currency = self.var2.get()
+                # fetches User Input
+                currency = self.var2.get()
 
+                # UseCases
+                if(currency[0]=='E'):
+                    value = priceList["USDEUR"]
 
-            if(currency[0]=='E'):
-                value = priceList["USDEUR"]
+                if(currency[0]=='I'):
+                    value = priceList["USDINR"]
 
-            if(currency[0]=='I'):
-                value = priceList["USDINR"]
+                if(currency[0]=='J'):
+                    value = priceList["USDJPY"]
 
-            if(currency[0]=='J'):
-                value = priceList["USDJPY"]
-
-            # Output
-            strVal.set(str(float(toConvert) * value))
+                # Output
+                strVal.set(str(float(toConvert) * value))
+                
+            else:
+                strVal.set('Enter a Positive Integer')
 
         else:
             strVal.set("Enter a number and try again")
