@@ -6,26 +6,34 @@ import requests
 class currConv:
     def convertCurr(self,event):
         toConvert = self.inputField.get()
-        try:
-            x = int(toConvert)
-        except ValueError:
-            strVal.set("There is an illegal character in the input, please check.")
-            return
-        strVal.set("Processing..")
-        # fetches current price for USD
-        response = requests.get(url="https://goo.gl/PbAhsZ")
+        if(toConvert.isnumeric()):
+            # fetches current price for USD
+            response = requests.get(url="https://goo.gl/PbAhsZ")
 
-        # converts the response
-        jsonResponse = response.json()
+            # converts the response
+            jsonResponse = response.json()
 
-        # fetches list of currency
-        priceList = jsonResponse["quotes"]
+            # fetches list of currency
+            priceList = jsonResponse["quotes"]
 
-        # fetches USD to INR Conversion rate
-        usdinr = priceList["USDINR"]
+            # fetches USD to INR Conversion rate
+            currency = self.var2.get()
 
-        # Output
-        strVal.set(str(float(toConvert) * usdinr))
+
+            if(currency[0]=='E'):
+                value = priceList["USDEUR"]
+
+            if(currency[0]=='I'):
+                value = priceList["USDINR"]
+
+            if(currency[0]=='J'):
+                value = priceList["USDJPY"]
+
+            # Output
+            strVal.set(str(float(toConvert) * value))
+
+        else:
+            strVal.set("Enter a number and try again")
 
 
     def __init__(self,master):
@@ -40,10 +48,10 @@ class currConv:
         #First tab
         head=Label(tab1,text="Currency Convertor",font=("palatino", 30))
         self.inputField=Entry(tab1,width=30,font=("garamond",20))
-        options = ["","US $","UK £","EUR €","IND ₹","JAP ¥"]
+        options = ["","EUR €","IND ₹","JAP ¥"]
         self.var1=StringVar(tab1)
         self.var1.set("US $")
-        list1=OptionMenu(tab1,self.var1,*options)
+        list1=OptionMenu(tab1,self.var1)
         list1.config(width=10)
         self.var2=StringVar(tab1)
         self.var2.set("IND ₹")
@@ -79,6 +87,8 @@ class currConv:
         scroll.grid(row=0, column=1, sticky='nsew')
         text['yscrollcommand'] = scroll.set
         text.grid()
+
+
 
 root =Tk()
 strVal= StringVar()
