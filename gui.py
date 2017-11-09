@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter.ttk import *
 import feedparser
-from api import convert
 import requests
 
 class currConv:
@@ -36,11 +35,13 @@ class currConv:
         #First tab
         head=Label(tab1,text="Currency Convertor",font=("palatino", 30))
         self.inputField=Entry(tab1,width=30,font=("garamond",20))
-        options = ["US $","UK £","EUR €","IND ₹","JAP ¥"]
+        options = ["","US $","UK £","EUR €","IND ₹","JAP ¥"]
         self.var1=StringVar(tab1)
+        self.var1.set("US $")
         list1=OptionMenu(tab1,self.var1,*options)
         list1.config(width=10)
         self.var2=StringVar(tab1)
+        self.var2.set("IND ₹")
         list2=OptionMenu(tab1,self.var2,*options)
         list2.config(width=10)
         but=Button(tab1,text="convert")
