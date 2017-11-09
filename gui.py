@@ -6,7 +6,12 @@ import requests
 class currConv:
     def convertCurr(self,event):
         toConvert = self.inputField.get()
-
+        try:
+            x = int(toConvert)
+        except ValueError:
+            strVal.set("There is an illegal character in the input, please check.")
+            return
+        strVal.set("Processing..")
         # fetches current price for USD
         response = requests.get(url="https://goo.gl/PbAhsZ")
 
@@ -74,8 +79,6 @@ class currConv:
         scroll.grid(row=0, column=1, sticky='nsew')
         text['yscrollcommand'] = scroll.set
         text.grid()
-
-
 
 root =Tk()
 strVal= StringVar()
