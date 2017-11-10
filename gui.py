@@ -6,8 +6,11 @@ import requests
 class currConv:
     def convertCurr(self,event):
         toConvert = self.inputField.get()
-        if(toConvert.isnumeric()):
-            # API Request
+        try:
+            x=float(toConvert)
+            if x <= 0:
+                raise ValueError
+                # API Request
             response = requests.get(url="https://goo.gl/PbAhsZ")
 
             # converts the response
@@ -33,7 +36,7 @@ class currConv:
             strVal.set(str(float(toConvert) * value))
                 
 
-        else:
+        except ValueError:
             strVal.set("Enter a number and try again")
 
 
@@ -88,8 +91,6 @@ class currConv:
         scroll.grid(row=0, column=1, sticky='nsew')
         text['yscrollcommand'] = scroll.set
         text.grid()
-
-
 
 root =Tk()
 strVal= StringVar()
